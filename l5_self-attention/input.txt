@@ -1,0 +1,353 @@
+The attention mechanism is a vital component in artificial neural networks, particularly in the domain of deep learning and natural language processing (NLP). It enables models to focus on specific parts of input data while making predictions or generating output. Initially popularized in the context of machine translation tasks, the attention mechanism has since found widespread applications in various other fields, including image captioning, speech recognition, and sentiment analysis.
+
+At its core, the attention mechanism allows neural networks to dynamically weigh the importance of different elements within the input sequence. This weighting process enables the model to selectively attend to relevant information, effectively enhancing its ability to understand and process complex data. In the context of machine translation, for example, the attention mechanism enables the model to align source and target language sequences more accurately, resulting in improved translation quality.
+
+One of the key advantages of the attention mechanism is its ability to handle variable-length inputs and outputs. Traditional neural network architectures often struggle with sequences of varying lengths, as they require fixed-size inputs and outputs. However, the attention mechanism alleviates this limitation by allowing the model to adaptively attend to different parts of the input sequence, regardless of their lengths. As a result, it facilitates more flexible and robust modeling of sequential data.
+
+The mechanism behind attention typically involves three main components: a query, a set of key-value pairs, and a mechanism to compute attention weights. The query represents the current state of the model, while the key-value pairs correspond to elements of the input sequence. By comparing the query with the keys, the model computes attention scores, which determine the relevance of each element. Finally, these scores are used to compute a weighted sum of the values, producing the context vector that captures the most important information for the current prediction step.
+
+In recent years, attention mechanisms have evolved and diversified, giving rise to various architectures such as self-attention and multi-head attention. Self-attention mechanisms, also known as intra-attention, enable each element in the input sequence to attend to other elements, capturing dependencies within the sequence more effectively. Multi-head attention, on the other hand, allows the model to attend to different parts of the input simultaneously, enhancing its capacity to extract diverse and relevant information. These advancements have contributed to significant improvements in the performance of deep learning models across a wide range of tasks.
+
+
+
+Machine learning-based attention is a mechanism which intuitively mimics cognitive attention. It calculates "soft" weights for each word, more precisely for its embedding, in the context window. These weights can be computed either in parallel (such as in transformers) or sequentially (such as recurrent neural networks). "Soft" weights can change during each runtime, in contrast to "hard" weights, which are (pre-)trained and fine-tuned and remain frozen afterwards.
+
+Attention was developed to address the weaknesses of leveraging information from the hidden outputs of recurrent neural networks. Recurrent neural networks favor more recent information contained in words at the end of a sentence, while information earlier in the sentence is expected to be attenuated. Attention allows the calculation of the hidden representation of a token equal access to any part of a sentence directly, rather than only through the previous hidden state.
+
+Earlier uses attached this mechanism to a serial recurrent neural network's language translation system (below), but later uses in Transformers large language models removed the recurrent neural network and relied heavily on the faster parallel attention scheme.
+
+Predecessors
+Predecessors of the mechanism were used in recurrent neural networks which, however, calculated "soft" weights sequentially and, at each step, considered the current word and other words within the context window. They were known as multiplicative modules, sigma pi units,[1] and hyper-networks.[2] They have been used in long short-term memory (LSTM) networks, multi-sensory data processing (sound, images, video, and text) in perceivers, fast weight controller's memory,[3] reasoning tasks in differentiable neural computers, and neural Turing machines.[4][5][6][7][8]
+
+Core calculations
+The attention network was designed to identify the highest correlations amongst words within a sentence, assuming that it has learned those patterns from the training corpus. This correlation is captured in neuronal weights through backpropagation, either from self-supervised pretraining or supervised fine-tuning.
+
+The example below (a encoder-only QKV variant of an attention network) shows how correlations are identified once a network has been trained and has the right weights. When looking at the word "that" in the sentence "see that girl run", the network should be able to identify "girl" as a highly correlated word. For simplicity this example focuses on the word "that", but in reality all words receive this treatment in parallel and the resulting soft-weights and context vectors are stacked into matrices for further task-specific use.
+
+
+Main menu
+
+WikipediaThe Free Encyclopedia
+Search Wikipedia
+Search
+Create account
+Log in
+
+Personal tools
+Contents hide
+(Top)
+Predecessors
+Core calculations
+A language translation example
+Variants
+Toggle Variants subsection
+Mathematical representation
+Standard Scaled Dot-Product Attention
+Multi-Head Attention
+Bahdanau (Additive) Attention
+Luong Attention (General)
+See also
+References
+External links
+Attention (machine learning)
+
+Article
+Talk
+Read
+Edit
+View history
+
+Tools
+From Wikipedia, the free encyclopedia
+Part of a series on
+Machine learning
+and data mining
+Paradigms
+Problems
+Supervised learning
+(classification • regression)
+Clustering
+Dimensionality reduction
+Structured prediction
+Anomaly detection
+Artificial neural network
+Reinforcement learning
+Learning with humans
+Model diagnostics
+Mathematical foundations
+Machine-learning venues
+Related articles
+vte
+Machine learning-based attention is a mechanism which intuitively mimics cognitive attention. It calculates "soft" weights for each word, more precisely for its embedding, in the context window. These weights can be computed either in parallel (such as in transformers) or sequentially (such as recurrent neural networks). "Soft" weights can change during each runtime, in contrast to "hard" weights, which are (pre-)trained and fine-tuned and remain frozen afterwards.
+
+Attention was developed to address the weaknesses of leveraging information from the hidden outputs of recurrent neural networks. Recurrent neural networks favor more recent information contained in words at the end of a sentence, while information earlier in the sentence is expected to be attenuated. Attention allows the calculation of the hidden representation of a token equal access to any part of a sentence directly, rather than only through the previous hidden state.
+
+Earlier uses attached this mechanism to a serial recurrent neural network's language translation system (below), but later uses in Transformers large language models removed the recurrent neural network and relied heavily on the faster parallel attention scheme.
+
+Predecessors
+Predecessors of the mechanism were used in recurrent neural networks which, however, calculated "soft" weights sequentially and, at each step, considered the current word and other words within the context window. They were known as multiplicative modules, sigma pi units,[1] and hyper-networks.[2] They have been used in long short-term memory (LSTM) networks, multi-sensory data processing (sound, images, video, and text) in perceivers, fast weight controller's memory,[3] reasoning tasks in differentiable neural computers, and neural Turing machines.[4][5][6][7][8]
+
+Core calculations
+The attention network was designed to identify the highest correlations amongst words within a sentence, assuming that it has learned those patterns from the training corpus. This correlation is captured in neuronal weights through backpropagation, either from self-supervised pretraining or supervised fine-tuning.
+
+The example below (a encoder-only QKV variant of an attention network) shows how correlations are identified once a network has been trained and has the right weights. When looking at the word "that" in the sentence "see that girl run", the network should be able to identify "girl" as a highly correlated word. For simplicity this example focuses on the word "that", but in reality all words receive this treatment in parallel and the resulting soft-weights and context vectors are stacked into matrices for further task-specific use.
+
+
+The Qw and Kw sub-networks of a single "attention head" calculate the soft weights, originating from the word "that". (Encoder-only QKV variant).
+The sentence is sent through 3 parallel streams (left), which emerge at the end as the context vector (right). The word embedding size is 300 and the neuron count is 100 in each sub-network of the attention head.
+
+The capital letter X denotes a matrix sized 4 × 300, consisting of the embeddings of all four words.
+The small underlined letter x denotes the embedding vector (sized 300) of the word "that".
+The attention head includes three (vertically arranged in the illustration) sub-networks, each having 100 neurons, being Wq, Wk and Wv their respective weight matrices, all them sized 300 × 100.
+q (from "query") is a vector sized 100, K ("key") and V ("value") are 4x100 matrices.
+The asterisk within parenthesis "(*)" denotes the softmax( qWk / √100 ). Softmax result is a vector sized 4 that later on is multiplied by the matrix V=XWv to obtain the context vector.
+Rescaling by √100 prevents a high variance in qWkT that would allow a single word to excessively dominate the softmax resulting in attention to only one word, as a discrete hard max would do.
+Notation: the commonly written row-wise softmax formula above assumes that vectors are rows, which contradicts the standard math notation of column vectors. More correctly, we should take the transpose of the context vector and use the column-wise softmax, resulting in the more correct form
+Context = (XWv)T × softmax( (Wk XT) × (xWq)T / √100 ).
+The query vector is compared (via dot product) with each word in the keys. This helps the model discover the most relevant word for the query word. In this case "girl" was determined to be the most relevant word for "that". The result (size 4 in this case) is run through the softmax function, producing a vector of size 4 with probabilities summing to 1. Multiplying this against the value matrix effectively amplifies the signal for the most important words in the sentence and diminishes the signal for less important words.[5]
+
+The structure of the input data is captured in the Wq and Wk weights, and the Wv weights express that structure in terms of more meaningful features for the task being trained for. For this reason, the attention head components are called Query (Wq), Key (Wk), and Value (Wv)—a loose and possibly misleading analogy with relational database systems.
+
+Note that the context vector for "that" does not rely on context vectors for the other words; therefore the context vectors of all words can be calculated using the whole matrix X, which includes all the word embeddings, instead of a single word's embedding vector x in the formula above, thus parallelizing the calculations. Now, the softmax can be interpreted as a matrix softmax acting on separate rows. This is a huge advantage over recurrent networks which must operate sequentially.
+
+The common query-key analogy with database queries suggests an asymmetric role for these vectors, where one item of interest (the query) is matched against all possible items (the keys). However, parallel calculations matches all words of the sentence with itself; therefore the roles of these vectors are symmetric. Possibly because the simplistic database analogy is flawed, much effort has gone into understand Attention further by studying their roles in focused settings, such as in-context learning,[9] masked language tasks,[10] stripped down transformers,[11] bigram statistics,[12] pairwise convolutions,[13] and arithmetic factoring.[14]
+
+A language translation example
+To build a machine that translates English to French, an attention unit is grafted to the basic Encoder-Decoder (diagram below). In the simplest case, the attention unit consists of dot products of the recurrent encoder states and does not need training. In practice, the attention unit consists of 3 trained, fully-connected neural network layers called query, key, and value.
+
+A step-by-step sequence of a language translation.
+Encoder-decoder with attention.[15] The left part (black lines) is the encoder-decoder, the middle part (orange lines) is the attention unit, and the right part (in grey & colors) is the computed data. Grey regions in H matrix and w vector are zero values. Numerical subscripts indicate vector sizes while lettered subscripts i and i − 1 indicate time steps.
+Encoder-decoder with attention.[15] The left part (black lines) is the encoder-decoder, the middle part (orange lines) is the attention unit, and the right part (in grey & colors) is the computed data. Grey regions in H matrix and w vector are zero values. Numerical subscripts indicate vector sizes while lettered subscripts i and i − 1 indicate time steps.
+Legend 
+Viewed as a matrix, the attention weights show how the network adjusts its focus according to context.[17]
+
+I	love	you
+je	0.94	0.02	0.04
+t'	0.11	0.01	0.88
+aime	0.03	0.95	0.02
+This view of the attention weights addresses the neural network "explainability" problem. Networks that perform verbatim translation without regard to word order would show the highest scores along the (dominant) diagonal of the matrix. The off-diagonal dominance shows that the attention mechanism is more nuanced. On the first pass through the decoder, 94% of the attention weight is on the first English word "I", so the network offers the word "je". On the second pass of the decoder, 88% of the attention weight is on the third English word "you", so it offers "t'". On the last pass, 95% of the attention weight is on the second English word "love", so it offers "aime".
+
+Variants
+Many variants of attention implement soft weights, such as
+
+"internal spotlights of attention"[18] generated by fast weight programmers or fast weight controllers (1992)[3] (also known as transformers with "linearized self-attention"[19][20]). A slow neural network learns by gradient descent to program the fast weights of another neural network through outer products of self-generated activation patterns called "FROM" and "TO" which in transformer terminology are called "key" and "value." This fast weight "attention mapping" is applied to queries.
+Bahdanau-style attention,[17] also referred to as additive attention,
+Luong-style attention,[21] which is known as multiplicative attention,
+highly parallelizable self-attention introduced in 2016 as decomposable attention[22] and successfully used in transformers a year later.
+For convolutional neural networks, attention mechanisms can be distinguished by the dimension on which they operate, namely: spatial attention,[23] channel attention,[24] or combinations.[25][26]
+
+These variants recombine the encoder-side inputs to redistribute those effects to each target output. Often, a correlation-style matrix of dot products provides the re-weighting coefficients. In the figures below, W is the matrix of context attention weights, similar to the formula in Core Calculations section above.
+
+1. encoder-decoder dot product	2. encoder-decoder QKV	3. encoder-only dot product	4. encoder-only QKV	5. Pytorch tutorial
+
+Both encoder & decoder are needed to calculate attention.[21]
+
+Both encoder & decoder are needed to calculate attention.[27]
+
+Decoder is not used to calculate attention. With only 1 input into corr, W is an auto-correlation of dot products. wij = xi xj[28]
+
+Decoder is not used to calculate attention.[29]
+
+A fully-connected layer is used to calculate attention instead of dot product correlation.[30]
+Legend 
+Mathematical representation
+Standard Scaled Dot-Product Attention
+Attention
+(
+𝑄
+,
+𝐾
+,
+𝑉
+)
+=
+softmax
+(
+𝑄
+𝐾
+𝑇
+𝑑
+𝑘
+)
+𝑉
+{\displaystyle {\text{Attention}}(Q,K,V)={\text{softmax}}\left({\frac {QK^{T}}{\sqrt {d_{k}}}}\right)V}
+where 
+𝑄
+,
+𝐾
+,
+𝑉
+{\displaystyle Q,K,V} are the query, key, and value matrices, 
+𝑑
+𝑘
+{\displaystyle d_{k}} is the dimension of the keys. Value vectors in matrix 
+𝑉
+{\displaystyle V} are weighted using the weights resulting from the softmax operation.
+Multi-Head Attention
+MultiHead
+(
+𝑄
+,
+𝐾
+,
+𝑉
+)
+=
+Concat
+(
+head
+1
+,
+.
+.
+.
+,
+head
+ℎ
+)
+𝑊
+𝑂
+{\displaystyle {\text{MultiHead}}(Q,K,V)={\text{Concat}}({\text{head}}_{1},...,{\text{head}}_{h})W^{O}}
+where each head is computed as:
+head
+𝑖
+=
+Attention
+(
+𝑄
+𝑊
+𝑖
+𝑄
+,
+𝐾
+𝑊
+𝑖
+𝐾
+,
+𝑉
+𝑊
+𝑖
+𝑉
+)
+{\displaystyle {\text{head}}_{i}={\text{Attention}}(QW_{i}^{Q},KW_{i}^{K},VW_{i}^{V})}
+and 
+𝑊
+𝑖
+𝑄
+,
+𝑊
+𝑖
+𝐾
+,
+𝑊
+𝑖
+𝑉
+{\displaystyle W_{i}^{Q},W_{i}^{K},W_{i}^{V}}, and 
+𝑊
+𝑂
+{\displaystyle W^{O}} are parameter matrices.
+Bahdanau (Additive) Attention
+Attention
+(
+𝑄
+,
+𝐾
+,
+𝑉
+)
+=
+softmax
+(
+𝑒
+)
+𝑉
+{\displaystyle {\text{Attention}}(Q,K,V)={\text{softmax}}(e)V}
+where 
+𝑒
+=
+tanh
+⁡
+(
+𝑊
+𝑄
+𝑄
++
+𝑊
+𝐾
+𝐾
+)
+{\displaystyle e=\tanh(W_{Q}Q+W_{K}K)} and 
+𝑊
+𝑄
+{\displaystyle W_{Q}} and 
+𝑊
+𝐾
+{\displaystyle W_{K}} are learnable weight matrices.[17]
+Luong Attention (General)
+Attention
+(
+𝑄
+,
+𝐾
+,
+𝑉
+)
+=
+softmax
+(
+𝑄
+𝑊
+𝑎
+𝐾
+𝑇
+)
+𝑉
+{\displaystyle {\text{Attention}}(Q,K,V)={\text{softmax}}(QW_{a}K^{T})V}
+where 
+𝑊
+𝑎
+{\displaystyle W_{a}} is a learnable weight matrix.[21]
+See also
+Transformer (deep learning architecture) § Efficient implementation
+References
+ Rumelhart, David E.; Mcclelland, James L.; Group, PDP Research (1987-07-29). Parallel Distributed Processing, Volume 1: Explorations in the Microstructure of Cognition: Foundations, Chapter 2 (PDF). Cambridge, Mass: Bradford Books. ISBN 978-0-262-68053-0.
+ Yann Lecun (2020). Deep Learning course at NYU, Spring 2020, video lecture Week 6. Event occurs at 53:00. Retrieved 2022-03-08.
+ Schmidhuber, Jürgen (1992). "Learning to control fast-weight memories: an alternative to recurrent nets". Neural Computation. 4 (1): 131–139. doi:10.1162/neco.1992.4.1.131. S2CID 16683347.
+ Graves, Alex; Wayne, Greg; Reynolds, Malcolm; Harley, Tim; Danihelka, Ivo; Grabska-Barwińska, Agnieszka; Colmenarejo, Sergio Gómez; Grefenstette, Edward; Ramalho, Tiago; Agapiou, John; Badia, Adrià Puigdomènech; Hermann, Karl Moritz; Zwols, Yori; Ostrovski, Georg; Cain, Adam; King, Helen; Summerfield, Christopher; Blunsom, Phil; Kavukcuoglu, Koray; Hassabis, Demis (2016-10-12). "Hybrid computing using a neural network with dynamic external memory". Nature. 538 (7626): 471–476. Bibcode:2016Natur.538..471G. doi:10.1038/nature20101. ISSN 1476-4687. PMID 27732574. S2CID 205251479.
+ Vaswani, Ashish; Shazeer, Noam; Parmar, Niki; Uszkoreit, Jakob; Jones, Llion; Gomez, Aidan N; Kaiser, Łukasz; Polosukhin, Illia (2017). "Attention is All you Need" (PDF). Advances in Neural Information Processing Systems. 30. Curran Associates, Inc.
+ Ramachandran, Prajit; Parmar, Niki; Vaswani, Ashish; Bello, Irwan; Levskaya, Anselm; Shlens, Jonathon (2019-06-13). "Stand-Alone Self-Attention in Vision Models". arXiv:1906.05909 [cs.CV].
+ Jaegle, Andrew; Gimeno, Felix; Brock, Andrew; Zisserman, Andrew; Vinyals, Oriol; Carreira, Joao (2021-06-22). "Perceiver: General Perception with Iterative Attention". arXiv:2103.03206 [cs.CV].
+ Ray, Tiernan. "Google's Supermodel: DeepMind Perceiver is a step on the road to an AI machine that could process anything and everything". ZDNet. Retrieved 2021-08-19.
+ Zhang, Ruiqi (2024). "Trained Transformers Learn Linear Models In-Context" (PDF). Journal of Machine Learning Research 1-55. 25.
+ Rende, Riccardo (2023). "Mapping of attention mechanisms to a generalized Potts model". arXiv:2304.07235.
+ He, Bobby (2023). "Simplifying Transformers Blocks". arXiv:2311.01906.
+ "Transformer Circuits". transformer-circuits.pub.
+ Transformer Neural Network Derived From Scratch. 2023. Event occurs at 05:30. Retrieved 2024-04-07.
+ Charton, François (2023). "Learning the Greatest Common Divisor: Explaining Transformer Predictions". arXiv:2308.15594.
+ Britz, Denny; Goldie, Anna; Luong, Minh-Thanh; Le, Quoc (2017-03-21). "Massive Exploration of Neural Machine Translation Architectures". arXiv:1703.03906 [cs.CV].
+ "Pytorch.org seq2seq tutorial". Retrieved December 2, 2021.
+ Bahdanau, Dzmitry; Cho, Kyunghyun; Bengio, Yoshua (2014). "Neural Machine Translation by Jointly Learning to Align and Translate". arXiv:1409.0473 [cs.CL].
+ Schmidhuber, Jürgen (1993). "Reducing the ratio between learning complexity and number of time-varying variables in fully recurrent nets". ICANN 1993. Springer. pp. 460–463.
+ Schlag, Imanol; Irie, Kazuki; Schmidhuber, Jürgen (2021). "Linear Transformers Are Secretly Fast Weight Programmers". ICML 2021. Springer. pp. 9355–9366.
+ Choromanski, Krzysztof; Likhosherstov, Valerii; Dohan, David; Song, Xingyou; Gane, Andreea; Sarlos, Tamas; Hawkins, Peter; Davis, Jared; Mohiuddin, Afroz; Kaiser, Lukasz; Belanger, David; Colwell, Lucy; Weller, Adrian (2020). "Rethinking Attention with Performers". arXiv:2009.14794 [cs.CL].
+ Luong, Minh-Thang (2015-09-20). "Effective Approaches to Attention-Based Neural Machine Translation". arXiv:1508.04025v5 [cs.CL].
+ "Papers with Code - A Decomposable Attention Model for Natural Language Inference". paperswithcode.com.
+ Zhu, Xizhou; Cheng, Dazhi; Zhang, Zheng; Lin, Stephen; Dai, Jifeng (2019). "An Empirical Study of Spatial Attention Mechanisms in Deep Networks". 2019 IEEE/CVF International Conference on Computer Vision (ICCV). pp. 6687–6696. arXiv:1904.05873. doi:10.1109/ICCV.2019.00679. ISBN 978-1-7281-4803-8. S2CID 118673006.
+ Hu, Jie; Shen, Li; Sun, Gang (2018). "Squeeze-and-Excitation Networks". 2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 7132–7141. arXiv:1709.01507. doi:10.1109/CVPR.2018.00745. ISBN 978-1-5386-6420-9. S2CID 206597034.
+ Woo, Sanghyun; Park, Jongchan; Lee, Joon-Young; Kweon, In So (2018-07-18). "CBAM: Convolutional Block Attention Module". arXiv:1807.06521 [cs.CV].
+ Georgescu, Mariana-Iuliana; Ionescu, Radu Tudor; Miron, Andreea-Iuliana; Savencu, Olivian; Ristea, Nicolae-Catalin; Verga, Nicolae; Khan, Fahad Shahbaz (2022-10-12). "Multimodal Multi-Head Convolutional Attention with Various Kernel Sizes for Medical Image Super-Resolution". arXiv:2204.04218 [eess.IV].
+ Neil Rhodes (2021). CS 152 NN—27: Attention: Keys, Queries, & Values. Event occurs at 06:30. Retrieved 2021-12-22.
+ Alfredo Canziani & Yann Lecun (2021). NYU Deep Learning course, Spring 2020. Event occurs at 05:30. Retrieved 2021-12-22.
+ Alfredo Canziani & Yann Lecun (2021). NYU Deep Learning course, Spring 2020. Event occurs at 20:15. Retrieved 2021-12-22.
+ Robertson, Sean. "NLP From Scratch: Translation With a Sequence To Sequence Network and Attention". pytorch.org. Retrieved 2021-12-22.
+External links
+Dan Jurafsky and James H. Martin (2022) Speech and Language Processing (3rd ed. draft, January 2022), ch. 10.4 Attention and ch. 9.7 Self-Attention Networks: Transformers
+Alex Graves (4 May 2020), Attention and Memory in Deep Learning (video lecture), DeepMind / UCL, via YouTube
+vte
+Differentiable computing
+Category: Machine learning
+This page was last edited on 22 April 2024, at 03:52 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License 4.0; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+Privacy policyAbout WikipediaDisclaimersContact WikipediaCode of ConductDevelopersStatisticsCookie statementMobile viewWikimedia FoundationPowered by MediaWiki
+Toggle limited content width
+
